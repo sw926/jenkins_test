@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage("ChangeLog") {
             steps {
-                sh label: 'Get Change Log', script: 'curl -s "http://192.168.161.244:8080/job/kalo/107/api/xml?wrapper=changes&xpath=//changeSet//comment" --user "sunwei:11eb26283ad0de235fb6442b9a8bc50514"'
+                sh label: 'Get Change Log', script: ' curl -s "http://127.0.0.1:8080/job/kalo-dev/11/api/xml?wrapper=changes&xpath=//changeSet//comment" --user "sunwei:11eb26283ad0de235fb6442b9a8bc50514" | sed -e "s/<\\/comment>//g; s/<comment>/* /g; s/<\\/*changes>//g" | sed \'/^$/d;G\' | sed \'/^$/d\''
             }
         }
         stage('Build') {
