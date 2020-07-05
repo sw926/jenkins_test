@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage("ChangeLog") {
             steps {
-                pp = load 'pipeline.groovy'
+                def pp = load 'pipeline.groovy'
                 pp.fetch()
 //                sh label: 'Get Change Log', script: 'curl -s "http://127.0.0.1:8080/job/kalo-dev/11/api/xml?wrapper=changes&xpath=//changeSet//comment" --user "sunwei:11eb26283ad0de235fb6442b9a8bc50514" | sed -e "s/<\\/comment>//g; s/<comment>/* /g; s/<\\/*changes>//g" | sed \'/^$/d;G\' | sed \'/^$/d\''
             }
